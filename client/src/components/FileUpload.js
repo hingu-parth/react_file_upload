@@ -73,7 +73,7 @@ export const FileUpload = () => {
           <div className='col-md-6 m-auto'>
             <h3 className='text-center'>{uploadedFile.fileName}</h3>
             <img
-              src={require(uploadedFile.filePath)}
+              src={uploadedFile.filePath}
               style={{ width: '100%' }}
               alt={uploadedFile.fileName}
             />
