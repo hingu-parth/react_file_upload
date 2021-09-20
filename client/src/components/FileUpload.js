@@ -37,7 +37,7 @@ export const FileUpload = () => {
       });
 
       const { fileName, filePath } = res.data;
-      console.log(fileName, filePath);
+      console.log(filePath);
       setUploadedFile({ fileName, filePath });
       setMessage('File Uploaded');
     } catch (error) {
@@ -60,9 +60,6 @@ export const FileUpload = () => {
             id='inputGroupFile02'
             onChange={onChange}
           />
-          {/* <label className='input-group-text' htmlFor='inputGroupFile02'>
-            {filename}
-          </label> */}
         </div>
         <Progress percentage={uploadPercentage} />
         <input
@@ -75,7 +72,11 @@ export const FileUpload = () => {
         <div className='row mt-5'>
           <div className='col-md-6 m-auto'>
             <h3 className='text-center'>{uploadedFile.fileName}</h3>
-            <img src={uploadedFile.filePath} style={{ width: '100%' }} alt='' />
+            <img
+              src={require(uploadedFile.filePath)}
+              style={{ width: '100%' }}
+              alt={uploadedFile.fileName}
+            />
           </div>
         </div>
       )}

@@ -1,9 +1,14 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const app = express();
 
 app.use(fileUpload());
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 //Upload endpoint
 app.post('/upload', (req, res) => {
@@ -18,7 +23,10 @@ app.post('/upload', (req, res) => {
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    res.json({
+      fileName: file.name,
+      filePath: `/uploads/${file.name}`,
+    });
   });
 });
 
